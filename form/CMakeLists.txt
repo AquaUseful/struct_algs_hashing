@@ -8,4 +8,5 @@ qt_wrap_ui(FORM_SRC_FILES ${FORM_UI_FILES})
 
 add_library(form ${FORM_SRC_FILES})
 target_include_directories(form PUBLIC ${FORM_INCLUDE_DIRS})
+target_link_libraries(form hashing)
 target_link_libraries(form Qt5::Core Qt5::Widgets)
