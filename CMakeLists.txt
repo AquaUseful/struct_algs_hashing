@@ -16,5 +16,6 @@ find_package(Qt5 COMPONENTS Widgets Core REQUIRED)
 # qt stuff end
 
 # Add all parts of project
+add_subdirectory(hashing)
 add_subdirectory(form)
 add_subdirectory(main)
