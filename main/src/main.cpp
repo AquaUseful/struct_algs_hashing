@@ -4,7 +4,6 @@
 #include <qwidget.h>
 
 #include "LabForm.hpp"
-#include "ui_form.h"
 
 auto main(int argc, char *argv[]) -> int {
   QApplication app(argc, argv);
