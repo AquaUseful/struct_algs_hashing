@@ -12,5 +12,7 @@ public:
   virtual ~LabForm();
 
 private:
+  void configure_slots();
+
   Ui::LabForm *ui;
 };
