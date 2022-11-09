@@ -1,10 +1,8 @@
 #pragma once
 
 #include <cmath>
-#include <concepts>
 #include <cstddef>
 #include <cstdint>
-#include <math.h>
 
 inline constexpr std::uint64_t hash_midsquare(std::uint64_t key,
                                               std::uint64_t index_digits) {
