@@ -3,15 +3,15 @@
 #include <cmath>
 #include <concepts>
 #include <cstddef>
+#include <cstdint>
 #include <math.h>
 
-template <std::unsigned_integral T>
-requires std::convertible_to<T, double> || std::convertible_to<T, float> ||
-    std::convertible_to<T, long double>
-inline constexpr auto hash_square_center(const T key,
-                                         const std::size_t index_digits)
-    -> std::size_t {
-  const auto square = key * key;
-  const auto square_length = std::trunc(std::log10(square));
-  return (square / (square_length / 2)) % index_digits;
+inline constexpr std::uint64_t hash_midsquare(std::uint64_t key,
+                                              std::uint64_t index_digits) {
+  std::uint64_t square = key * key;
+  std::uint64_t square_length = std::trunc(std::log10(square));
+  std::uint64_t div = 1;
+  for (auto i = 0; i < index_digits; div *= 10, ++i)
+    ;
+  return (square / ((square_length - index_digits) / 2)) % div;
 }

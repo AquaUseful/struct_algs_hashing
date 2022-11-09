@@ -2,8 +2,9 @@
 
 #include <concepts>
 #include <cstddef>
+#include <cstdint>
 
-template <std::unsigned_integral KeyT, std::unsigned_integral DivT>
-inline constexpr auto hash_division(const KeyT key, const DivT divisor) -> std::size_t {
+inline constexpr std::uint64_t hash_division(std::uint64_t key,
+                                             std::uint64_t divisor) {
   return key % divisor;
 }
