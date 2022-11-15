@@ -11,7 +11,7 @@
 #include "hash_square_center.hpp"
 #include "hash_wrapping.hpp"
 
-Counter::Counter(size_t size) : m_rgen(rdev()) {}
+Counter::Counter() : m_rdev{}, m_rgen(m_rdev()) {}
 
 Counter::collision_count_t Counter::calc_collisions(key_t (*hash_func)(key_t)) {
   collision_count_t result{0};
@@ -35,7 +35,7 @@ Counter::collision_count_t Counter::calc_collisions(key_t (*hash_func)(key_t)) {
 }
 
 Counter::full_collision_count_t Counter::calc_collisions() {
-  m_rgen.seed(rdev());
+  m_rgen.seed(m_rdev());
 
   const auto div = [](key_t key) { return hash_division(key, 997); };
   const auto mult = [](key_t key) {
@@ -60,7 +60,7 @@ void Counter::calc_score(batch_count_t batches) {
         collisions.wrapping};
 
     collision_count_t min_collisions =
-        *std::min(collisions_array.cbegin(), collisions_array.cend());
+        *std::min_element(collisions_array.cbegin(), collisions_array.cend());
 
     m_scores.division += ((collisions.division <= min_collisions) ? 1 : 0);
     m_scores.multiplication +=

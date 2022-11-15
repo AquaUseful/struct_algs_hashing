@@ -32,14 +32,12 @@ public:
   using hash_chain_t = std::forward_list<key_t>;
   using hash_table_t = std::vector<hash_chain_t>;
 
-  using size_t = std::size_t;
-
   using rand_dev_t = std::random_device;
   using rand_gen_t = std::mt19937_64;
   using rand_distrib_t = std::uniform_int_distribution<key_t>;
 
 public:
-  Counter(size_t);
+  Counter();
 
   void calc_score(batch_count_t);
   full_score_t score() const;
@@ -49,12 +47,12 @@ private:
   collision_count_t calc_collisions(key_t (*)(key_t));
 
 private:
-  const static key_t rand_min{0};
+  const static key_t rand_min{32};
   const static key_t rand_max{100'000};
   const static batch_size_t batch_size{1000};
   const static table_size_t table_size{1000};
-  static rand_dev_t rdev;
 
+  rand_dev_t m_rdev;
   rand_gen_t m_rgen;
   full_score_t m_scores;
 };
