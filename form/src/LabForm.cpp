@@ -21,29 +21,11 @@ void LabForm::configure_slots() {
 }
 
 void LabForm::update_hashes() {
-  update_division_hash();
-  update_multiplication_hash();
-  update_square_center_hash();
-  update_wrapping_hash();
-}
+  typename counter_t::batch_count_t batches = ui->batchCount->value();
+  m_score_counter.calc_score(batches);
 
-void LabForm::update_division_hash() {
-  const auto hash = hash_division(hash_key, 997);
-  set_text(ui->divHash, hash);
-}
-
-void LabForm::update_multiplication_hash() {
-  const auto hash =
-      hash_multiplication(hash_key, (std::sqrt(5) - 1) / 2, index_count);
-  set_text(ui->multHash, hash);
-}
-
-void LabForm::update_square_center_hash() {
-  const auto hash = hash_midsquare(hash_key, hash_digits);
-  set_text(ui->squareHash, hash);
-}
-
-void LabForm::update_wrapping_hash() {
-  const auto hash = hash_wrapping(hash_key, index_count);
-  set_text(ui->wrapHash, hash);
+  set_text(ui->divHash, m_score_counter.score().division);
+  set_text(ui->squareHash, m_score_counter.score().midsquare);
+  set_text(ui->wrapHash, m_score_counter.score().wrapping);
+  set_text(ui->multHash, m_score_counter.score().multiplication);
 }

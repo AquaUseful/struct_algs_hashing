@@ -12,8 +12,7 @@ inline constexpr std::uint64_t hash_midsquare(std::uint64_t key,
   for (auto i = 0; i < index_digits; div *= 10, ++i)
     ;
   std::uint64_t trunc = 1;
-  for (auto i = 0; i < ((square_length - index_digits) / 2); trunc *= 10, ++i)
-    ;
-
+    for (auto i = 0; i < ((square_length - index_digits) / 2); trunc *= 10, ++i)
+      ;
   return ((square / trunc) % div);
 }

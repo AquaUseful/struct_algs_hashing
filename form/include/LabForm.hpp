@@ -1,16 +1,20 @@
 #pragma once
 
-#include "ui_form.h"
 #include <cstddef>
 #include <cstdint>
 #include <qlineedit.h>
 #include <string>
 
+#include "Counter.hpp"
 #include "hash.hpp"
+#include "ui_form.h"
 
 class LabForm : public QMainWindow {
 
   Q_OBJECT
+
+public:
+  using counter_t = Counter;
 
 public:
   explicit LabForm(QWidget *parent = nullptr);
@@ -33,7 +37,5 @@ private slots:
 
 private:
   Ui::LabForm *ui;
-  const std::uint64_t hash_key{45678};
-  const std::uint64_t index_count{1000};
-  const std::uint64_t hash_digits{3};
+  counter_t m_score_counter;
 };
