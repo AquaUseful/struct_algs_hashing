@@ -353,6 +353,13 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QPushButton" name="updateArraysBtn">
+            <property name="text">
+             <string>Обновить массивы</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>

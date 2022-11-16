@@ -5,6 +5,7 @@
 #include <qlineedit.h>
 #include <string>
 
+#include "Bench.hpp"
 #include "Counter.hpp"
 #include "hash.hpp"
 #include "ui_form.h"
@@ -15,6 +16,7 @@ class LabForm : public QMainWindow {
 
 public:
   using counter_t = Counter;
+  using benchmark_t = Bench;
 
 public:
   explicit LabForm(QWidget *parent = nullptr);
@@ -33,9 +35,12 @@ private:
   }
 
 private slots:
-  void update_hashes();
+  void update_collision_score();
+  void update_search_bench();
+  void update_arrays();
 
 private:
   Ui::LabForm *ui;
   counter_t m_score_counter;
+  benchmark_t m_benchmark;
 };
