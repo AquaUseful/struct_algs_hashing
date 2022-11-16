@@ -1,4 +1,5 @@
 #include "OpenAddressHashmap.hpp"
+#include "hash_division.hpp"
 #include <cstddef>
 
 OpenAddressHashmap::HashFunc::HashFunc(size_t table_size)
@@ -7,6 +8,7 @@ OpenAddressHashmap::HashFunc::HashFunc(size_t table_size)
 OpenAddressHashmap::value_t
 OpenAddressHashmap::HashFunc::operator()(value_t val) {
   return hash_multiplication(val, (std::sqrt(5) - 1) / 2, m_index_count);
+  // return hash_division(val, 3);
 }
 
 OpenAddressHashmap::OpenAddressHashmap(size_t table_size)
@@ -45,9 +47,9 @@ OpenAddressHashmap::search_result_t OpenAddressHashmap::search(value_t val) {
   enum class SearchRes { NotFound, Found, Skip };
   const auto search_func = [&val](const cell_t &cell) {
     if (!cell.free) {
-      if (cell.search_skip) {
+      if (cell.search_skip || (cell.value != val)) {
         return SearchRes::Skip;
-      } else if (cell.value == val) {
+      } else {
         return SearchRes::Found;
       }
     }
@@ -84,4 +86,5 @@ OpenAddressHashmap::search_result_t OpenAddressHashmap::search(value_t val) {
       break;
     }
   }
+  return search_result_t{false, comparisons};
 }

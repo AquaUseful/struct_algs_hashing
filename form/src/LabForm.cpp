@@ -1,11 +1,15 @@
 #include "LabForm.hpp"
-#include "Bench.hpp"
-#include "hash_multiplication.hpp"
-#include "hash_square_center.hpp"
-#include "hash_wrapping.hpp"
 
 #include <cmath>
 #include <string>
+
+#include "Bench.hpp"
+#include "ChainHashmap.hpp"
+#include "OpenAddressHashmap.hpp"
+
+#include "hash_multiplication.hpp"
+#include "hash_square_center.hpp"
+#include "hash_wrapping.hpp"
 
 LabForm::LabForm(QWidget *parent)
     : QMainWindow(parent), ui{new Ui::LabForm}, m_benchmark(10'000, 10'000) {
@@ -38,10 +42,15 @@ void LabForm::update_collision_score() {
 }
 
 void LabForm::update_search_bench() {
-  const auto oa_result = m_benchmark.oa_bench();
+  const auto oa_result = m_benchmark.bench<OpenAddressHashmap>();
   set_text(ui->openTime, oa_result.time.count());
   set_text(ui->openCmp, oa_result.comparisons);
   set_text(ui->openFound, oa_result.found_count);
+
+  const auto ch_result = m_benchmark.bench<ChainHashmap>();
+  set_text(ui->chainTime, ch_result.time.count());
+  set_text(ui->chainCmp, ch_result.comparisons);
+  set_text(ui->chainFound, ch_result.found_count);
 }
 
 void LabForm::update_arrays() { m_benchmark.refill(); }

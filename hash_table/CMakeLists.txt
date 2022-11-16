@@ -1,5 +1,5 @@
 set(TARGET_NAME hash_table)
-set(TARGET_SRC_FILES src/OpenAddressHashmap.cpp src/Bench.cpp)
+set(TARGET_SRC_FILES src/OpenAddressHashmap.cpp src/ChainHashMap.cpp src/Bench.cpp)
 set(TARGET_INCLUDE_DIR include/)
 
 add_library(${TARGET_NAME} STATIC ${TARGET_SRC_FILES})
