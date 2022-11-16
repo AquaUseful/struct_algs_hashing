@@ -27,6 +27,7 @@ Counter::collision_count_t Counter::calc_collisions(key_t (*hash_func)(key_t)) {
     } else {
       if (std::find(chain.cbegin(), chain.cend(), key) == chain.cend()) {
         ++result;
+        chain.push_front(key);
       }
     }
   }

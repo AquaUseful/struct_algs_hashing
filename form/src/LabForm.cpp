@@ -21,7 +21,8 @@ LabForm::~LabForm() { delete ui; }
 
 void LabForm::configure_slots() {
   connect(ui->quitBtn, SIGNAL(clicked()), this, SLOT(close()));
-  connect(ui->calculateBtn, SIGNAL(clicked()), this, SLOT(update_hashes()));
+  connect(ui->calculateBtn, SIGNAL(clicked()), this,
+          SLOT(update_collision_score()));
   connect(ui->updateArraysBtn, SIGNAL(clicked()), this, SLOT(update_arrays()));
   connect(ui->compareBtn, SIGNAL(clicked()), this, SLOT(update_search_bench()));
 }
